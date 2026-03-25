@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Maintenance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Digital logbook and reminder system</p>
+                <h1>Equipment Maintenance System</h1>
+                <p class="intro">
+                    Track aircraft parts, tools, and service activity in one simple dashboard.
+                </p>
+            </div>
+            <div class="hero-card">
+                <h2>Dashboard</h2>
+                <div id="dashboard-cards" class="stats-grid"></div>
+                <div>
+                    <h3>Service alerts</h3>
+                    <ul id="due-soon-list" class="alert-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Add Equipment</h2>
+            <form id="equipment-form" class="form-grid">
+                <input type="hidden" name="id">
+                <input name="name" placeholder="Equipment name" required>
+                <input name="equipment_type" placeholder="Type" required>
+                <select name="status" required>
+                    <option value="In Service">In Service</option>
+                    <option value="Under Maintenance">Under Maintenance</option>
+                    <option value="Out of Service">Out of Service</option>
+                </select>
+                <input name="serial_number" placeholder="Serial number" required>
+                <input name="location" placeholder="Location" required>
+                <label>
+                    Last service date
+                    <input name="last_service_date" type="date">
+                </label>
+                <label>
+                    Next service date
+                    <input name="next_service_date" type="date">
+                </label>
+                <textarea name="notes" placeholder="Notes"></textarea>
+                <div class="action-row">
+                    <button id="equipment-submit" type="submit">Save Equipment</button>
+                    <button id="equipment-cancel" class="ghost" type="button">Cancel Edit</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Equipment Register</h2>
+                <div class="filters">
+                    <input id="search-input" placeholder="Search name, serial, location">
+                    <select id="status-filter">
+                        <option value="">All statuses</option>
+                        <option value="In Service">In Service</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                        <option value="Out of Service">Out of Service</option>
+                    </select>
+                    <input id="type-filter" placeholder="Filter by type">
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Serial</th>
+                            <th>Location</th>
+                            <th>Next Service</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipment-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Record Maintenance</h2>
+            <form id="maintenance-form" class="form-grid">
+                <select name="equipment_id" id="maintenance-equipment" required></select>
+                <input name="technician" placeholder="Technician" required>
+                <label>
+                    Service date
+                    <input name="service_date" type="date" required>
+                </label>
+                <input name="outcome" placeholder="Outcome" required>
+                <textarea name="description" placeholder="Work performed" required></textarea>
+                <button type="submit">Add Maintenance Record</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Maintenance History</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Serial</th>
+                            <th>Description</th>
+                            <th>Service Date</th>
+                            <th>Technician</th>
+                            <th>Outcome</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintenance-table"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
