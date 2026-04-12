@@ -5,3 +5,8 @@ venv/
 .env
 instance/
 maintenance.db
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
